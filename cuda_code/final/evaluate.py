@@ -1,4 +1,4 @@
-from failed_exec import create_n_particles
+from init_particles import create_n_particles
 from numba import jit
 import math
 import random
