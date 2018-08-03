@@ -2,6 +2,7 @@ from init_particles import create_n_particles
 from numba import jit
 import math
 import random
+from test_functions import *
 
 @jit(debug=True)
 def error(position):
@@ -14,7 +15,7 @@ def error(position):
 
 @jit
 def evaluate(costFunc, p):
-    p['err_i'] = costFunc(p['position_i'])
+    p['err_i'] = costFunc(p['position_i'][0])
     # check to see if the current position is an individual best
     if p['err_i'] < p['err_best_i'] or p['err_best_i']==-1:
         p['pos_best_i'] = p['position_i']
@@ -49,13 +50,3 @@ def update_position(bounds, p):
         if p['position_i'][0][i] < bounds[i][0]:
             p['position_i'][0][i]=bounds[i][0]
     return p['position_i']
-
-
-
-if __name__ == '__main__':
-    bounds=[(-10,10),(-10,10)]
-    particles = create_n_particles(100, 2, bounds)
-#     evaluate(error, particles[0])
-    pos_best_g = particles[0]['position_i']
-    update_velocity(pos_best_g, particles[1])
-#     update_position(bounds, particles[1])

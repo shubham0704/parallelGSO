@@ -1,10 +1,6 @@
 from numba import jit
 import numpy as np
 
-# particle_dtypes = np.dtype({'names':['position_i', 'velocity_i', 'pos_best_i',
-#                                       'err_best_i', 'err_i', 'num_dimensions'],
-#                              'formats':[np.double,np.double, np.double, np.double, np.double, np.int32]
-#                             })
 
 @jit
 def create_n_particles(n, num_dimensions, swarm_init):
