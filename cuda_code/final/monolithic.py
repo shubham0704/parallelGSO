@@ -378,10 +378,10 @@ def get_cpu_percent(pids, tim):
     print(ps_dict)
     
 
-# M = [5, 10, 15, 20, 25, 30, 35, 40]
-# bounds = [[-100, 100], [-100, 100]]
-# num_particles = 50
-# max_iter = 1000
-# m = 5
+M = [5, 10, 15, 20, 25, 30, 35, 40]
+bounds = [[-100, 100], [-100, 100]]
+num_particles = 50
+max_iter = 1000
+m = 5
 
-# GSO(1, bounds, num_particles, max_iter, rastrigin, tim=None)
+GSO(1, bounds, num_particles, max_iter, rastrigin, tim=None)
