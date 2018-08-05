@@ -89,10 +89,6 @@ def append(x0, xf, n):
         #print i,':',xl
     return xl, yl
 
-xl,yl=0,0
-xl,yl = append(x0, xf, n)   
-pylab.plot(xl,yl)
-
 
 ### Zakharov Function
 
