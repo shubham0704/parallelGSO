@@ -14,7 +14,7 @@ Take a look at a detailed introduction to our project - **[HERE](https://github.
 # Installation
 
 ```
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 # To run Benchmarks
@@ -28,7 +28,7 @@ $ jupyter notebook
 ```
 
 You will then find a lot of notebooks which contains all kinds of different testings
-To run the main experiments, check the Main Experiments (Performance Tests) notebook
+To run the main experiments, check the [Main Experiments (Performance Tests) notebook](https://github.com/shubham0704/parallelGSO/blob/master/experiments/tests/Main%20Experiments%20(Performance%20Tests).ipynb) 
 
 
 
