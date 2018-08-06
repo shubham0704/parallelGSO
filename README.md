@@ -13,9 +13,17 @@ Take a look at a detailed introduction to our project - **[HERE](https://github.
 
 # Installation
 
+Anaconda Users - 
+```
+$ conda env update -f env.yaml
+$ conda activate pgso
+```
+
+PIP Users - 
 ```
 pip install -r requirements.txt
 ```
+
 
 # To run Benchmarks
 
