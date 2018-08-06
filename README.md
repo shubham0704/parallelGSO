@@ -4,7 +4,7 @@
     
 A highly scalable parallel version of Galactic Swarm Optimisation Algorithm
 
-Galactic Swarm Optimization is a state-of-the-art meta-heuristic optimization algorithm which is insiped by the motion of stars aroud galaxies and galaxies themselves revolving around under the influence of gravity and interactions.
+Galactic Swarm Optimization is a state-of-the-art meta-heuristic optimization algorithm which is insiped by the motion of stars, galaxies, superclusters interacting with each other under the influence of gravity.
 
 ----
 Take a look at a detailed introduction to our project - **[HERE](https://github.com/shubham0704/parallelGSO/blob/master/white%20paper.ipynb)**
