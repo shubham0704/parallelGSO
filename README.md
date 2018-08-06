@@ -16,37 +16,23 @@ pip install requirements.txt
 
 # To run Benchmarks
 
-In the home directory of the project
+All the testing experiments are present in the experiments/tests directory.
+To rerun the benchmarks do -
 ```
-from cuda_code.final.benchmark import monitor, multiple_cpu_plot
+// cd into the this project directory then
+$ cd experiments/tests
+$ jupyter notebook
+```
 
-:parameters:
-monitor(target=<GSO,PSO>, 
-        bounds=<[[-100, 100],[-100, 100]]>, 
-        num_particles=<number of particles>,
-        max_iter=<maximum number of iterations>,
-        costfunc=<n dimensional cost function>
-        )
-:returns:
-        cpu_percents -> list of cpu_percent/number of proc (debug feature) [list]
-        time_at -> time for plotting cpu usage [list]
-        top_prcnt -> [[1,2,3,4,5,6,7,8], ....] list of cpu usage for each core
+You will then find a lot of notebooks which contains all kinds of different testings
+To run the main experiments, check the Main Experiments (Performance Tests) notebook
 
-:parameters:
-multiple_cpu_plot(top_prcnt,
-                  time_at,
-                  zoom_range = [lower, upper] -> zoom from one value to another
-                  step = float -> how much to move from lower to upper by
-                  )
-:returns:
-        will display maximum 8 cpu graph
-        not scaled for more than 8 cpu because of subplots
 ```
 
 # Run PGSO (Parallel Galactic Swarm Optimization)
 
 ```
-from cuda_code.final.monolithic import GSO as PGSO
+from pgso.gso import GSO as PGSO
 PGSO(
     M=<number of processes to be spawned
     bounds=<[[-100, 100],[-100, 100]]>, 
@@ -64,5 +50,5 @@ PGSO(
 
 ```
 available_functions = [sphere, rosen, rastrigin, griewank, zakharov, nonContinuousRastrigin]
-from cuda_code.final.test_functions import <function>
+from pgso.test_functions import <function>
 
