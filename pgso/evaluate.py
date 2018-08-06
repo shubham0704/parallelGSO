@@ -1,8 +1,8 @@
-from init_particles import create_n_particles
+from pgso.test_functions import *
+from pgso.init_particles import create_n_particles
 from numba import jit
 import math
 import random
-from test_functions import *
 
 @jit(debug=True)
 def error(position):
@@ -13,9 +13,14 @@ def error(position):
         err += (xi * xi) - (10 * math.cos(2 * math.pi * xi)) + 10
     return err
 
-@jit
+#@jit
 def evaluate(costFunc, p):
-    p['err_i'] = costFunc(p['position_i'][0])
+    
+    try:
+        p['err_i'] = costFunc(p['position_i'][0])
+    except:
+        p['err_i'] = costFunc(p['position_i'])
+
     # check to see if the current position is an individual best
     if p['err_i'] < p['err_best_i'] or p['err_best_i']==-1:
         p['pos_best_i'] = p['position_i']

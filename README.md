@@ -1,6 +1,11 @@
 # parallelGSO
 A highly scalable parallel version of Galactic Swarm Optimisation Algorithm
 
+Galactic Swarm Optimization is a state-of-the-art meta-heuristic optimization algorithm which is insiped by the motion of stars aroud galaxies and galaxies themselves revolving around under the influence of gravity and interactions.
+
+----
+Take a look at a detailed introduction to our project - **[HERE](https://github.com/shubham0704/parallelGSO/blob/sbdev/white%20paper-final.ipynb)**
+
 -------
 
 # Installation
@@ -38,7 +43,7 @@ multiple_cpu_plot(top_prcnt,
         not scaled for more than 8 cpu because of subplots
 ```
 
-# Run PGSO (parallel global swarm optimization)
+# Run PGSO (Parallel Galactic Swarm Optimization)
 
 ```
 from cuda_code.final.monolithic import GSO as PGSO
@@ -60,3 +65,4 @@ PGSO(
 ```
 available_functions = [sphere, rosen, rastrigin, griewank, zakharov, nonContinuousRastrigin]
 from cuda_code.final.test_functions import <function>
+

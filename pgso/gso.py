@@ -1,11 +1,11 @@
-from evaluate import error, evaluate, update_velocity, update_position
+from pgso.evaluate import error, evaluate, update_velocity, update_position
 from multiprocessing import Manager, Process, Lock
-from init_particles import create_n_particles
+from pgso.init_particles import create_n_particles
 from numba import jit
 import numpy as np
 
 
-@jit
+# @jit
 def PSO_purana(costFunc,bounds,maxiter,swarm_init=None):
         
     num_dimensions=len(swarm_init[0])
@@ -38,18 +38,10 @@ def PSO_purana(costFunc,bounds,maxiter,swarm_init=None):
     #print (pos_best_g,' , ', err_best_g)
     return pos_best_g[0], err_best_g
 
-@jit
+# @jit
 def PSO(costFunc,bounds,maxiter,shared_list, return_list, l,num_particles=None,swarm_init=None):
 
-    
-#     if num_particles is not None:
-#         dims = len(bounds)
-#         lb = bounds[0][0] 
-#         ub = bounds[0][1]
-#         swarm_init = []
-#         for _ in range(num_particles):
-#             swarm_init.append(np.random.uniform(lb, ub, dims))
-        
+            
     num_dimensions=len(swarm_init[0])
     err_best_g=-1                   # best error for group
     pos_best_g=[]                   # best position for group
@@ -62,8 +54,8 @@ def PSO(costFunc,bounds,maxiter,shared_list, return_list, l,num_particles=None,s
         #print i,err_best_g
         # cycle through particles in swarm and evaluate fitness
         for j in range(0,num_particles):
-            swarm[j]['pos_best_i'], swarm[j]['err_best_i']  = evaluate(costFunc, swarm[j])
-
+            best_pos, swarm[j]['err_best_i']  = evaluate(costFunc, swarm[j])
+            swarm[j]['pos_best_i'] = best_pos
             # determine if current particle is the best (globally)
             if swarm[j]['err_i'] < err_best_g or err_best_g == -1:
                 pos_best_g=list(swarm[j]['position_i'])
@@ -72,7 +64,7 @@ def PSO(costFunc,bounds,maxiter,shared_list, return_list, l,num_particles=None,s
         # update the global best in the manager list after k iterations
         # we need to add some mutex lock here
         
-        if i == max_iter//2:
+        if i == maxiter//2:
             l.acquire()
             best_galactic_pos = shared_list[0]
             best_galactic_err = shared_list[1]
@@ -106,8 +98,23 @@ def stop(process_list):
     for p in process_list:
         p.join()
 
-@jit
-def GSO(M, bounds, num_particles, max_iter):
+# @jit
+def GSO(M, bounds, num_particles, max_iter, costFunc):
+    """
+    Galactic Swarm Optimization:
+    ----------------------------
+    A meta-heuristic algorithm insipred by the interplay
+    of stars, galaxies and superclusters under the influence
+    of gravity.
+    
+    Input:
+    ------
+    M: integer 
+    number of galaxies
+    bounds: 
+    bounds of the search space
+    
+    """
     subswarm_bests = []
     dims = len(bounds)
     lb = bounds[0][0] 
@@ -124,18 +131,10 @@ def GSO(M, bounds, num_particles, max_iter):
         for _ in range(num_particles):
             swarm_init.append(np.random.uniform(lb, ub, dims))
 
-        p = Process(target=PSO, args=(error, bounds, max_iter, shared_list, return_list, l, None,swarm_init))
+        p = Process(target=PSO, args=(costFunc, bounds, max_iter, shared_list, return_list, l, None,swarm_init))
         all_processes.append(p)
 
     start(all_processes)
     stop(all_processes)    
     #print(return_list)
     return PSO_purana(error, bounds, max_iter, swarm_init=list(return_list))
-
-M = [5, 10, 15, 20, 25, 30, 35, 40]
-bounds = [[-10, 10], [-10, 10]]
-num_particles = 35
-max_iter = 30
-m = 5
-
-GSO(5, bounds, num_particles, max_iter)
