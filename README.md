@@ -19,7 +19,7 @@ pip install requirements.txt
 All the testing experiments are present in the experiments/tests directory.
 To rerun the benchmarks do -
 ```
-// cd into the this project directory then
+// cd into this project directory then
 $ cd experiments/tests
 $ jupyter notebook
 ```
@@ -27,9 +27,9 @@ $ jupyter notebook
 You will then find a lot of notebooks which contains all kinds of different testings
 To run the main experiments, check the Main Experiments (Performance Tests) notebook
 
-```
 
-# Run PGSO (Parallel Galactic Swarm Optimization)
+
+**To Use PGSO (Parallel Galactic Swarm Optimization) as a module do -** 
 
 ```
 from pgso.gso import GSO as PGSO
@@ -46,7 +46,7 @@ PGSO(
     best_error -> the best minimized error for the given function
 ```
 
-# To test using our provided test functions
+**To test using our provided test functions**
 
 ```
 available_functions = [sphere, rosen, rastrigin, griewank, zakharov, nonContinuousRastrigin]
