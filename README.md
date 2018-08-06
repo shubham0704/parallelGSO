@@ -37,7 +37,7 @@ $ jupyter notebook
 
 You will then find a lot of notebooks which contains all kinds of different testings
 
-To run the main experiments, check -[Main Experiments (Performance Tests) notebook](https://github.com/shubham0704/parallelGSO/blob/master/experiments/tests/Main%20Experiments%20(Performance%20Tests).ipynb) 
+To run the main experiments, check -[Main Experiments (Performance Tests)](https://github.com/shubham0704/parallelGSO/blob/master/experiments/tests/Main%20Experiments%20(Performance%20Tests).ipynb) 
 
 For per-cpu utilization benchmarks check - [Per CPU Utilisation Experiments](https://github.com/shubham0704/parallelGSO/blob/master/experiments/tests/Per%20CPU%20Utilisation%20Experiments.ipynb)
 
