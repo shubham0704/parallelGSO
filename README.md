@@ -13,13 +13,14 @@ Take a look at a detailed introduction to our project - **[HERE](https://github.
 
 # Installation
 
-Anaconda Users - 
+We recommend Anaconda. For installing Anaconda (for Linux) you can use this [script](https://github.com/shubham0704/deep_learning_env/blob/master/install_anaconda.sh)
+
+For Anaconda Users - 
 ```
 $ conda env update -f env.yaml
 $ conda activate pgso
 ```
-
-PIP Users - 
+For PIP Users - 
 ```
 pip install -r requirements.txt
 ```
