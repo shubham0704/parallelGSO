@@ -136,7 +136,7 @@ def schwefel_222(x):
     foo = sum(abs(x)) + np.prod(abs(x))
     return foo
 
-### Griewangk Function n-dimensional
+### Griewangk Function n-dimensional xi [-600, 600]
 def griewank( x, fr=4000 ):
     x = np.asarray_chkfinite(x)
     n = len(x)
@@ -145,7 +145,7 @@ def griewank( x, fr=4000 ):
     p = prod( cos( x / sqrt(j) ))
     return s/fr - p + 1
 
-### Zakharov Function
+### Zakharov Function xi [-5, 10]
 def zakharov( x ):  # zakh.m
     x = np.asarray_chkfinite(x)
     n = len(x)
