@@ -39,7 +39,7 @@ def PSO_purana(costFunc,bounds,maxiter,swarm_init=None):
     return pos_best_g[0], err_best_g
 
 # @jit
-def PSO(costFunc,bounds,maxiter,shared_list, return_list, l,num_particles=None,swarm_init=None):
+def PSO(costFunc,bounds,maxiter,shared_list, return_list, l,num_particles=None,swarm_init=None, log=True, t_list=None):
 
             
     num_dimensions=len(swarm_init[0])
@@ -86,6 +86,8 @@ def PSO(costFunc,bounds,maxiter,shared_list, return_list, l,num_particles=None,s
         for j in range(0,num_particles):
             swarm[j]['velocity_i'] = update_velocity(pos_best_g, swarm[j])
             swarm[j]['position_i'] = update_position(bounds, swarm[j])
+        if log:
+            t_list.append(err_best_g)
         i+=1
     return_list.append(pos_best_g[0])
 
@@ -99,7 +101,7 @@ def stop(process_list):
         p.join()
 
 # @jit
-def GSO(M, bounds, num_particles, max_iter, costFunc):
+def GSO(M, bounds, num_particles, max_iter, costFunc, log=False, the_list=None):
     """
     Galactic Swarm Optimization:
     ----------------------------
@@ -125,16 +127,39 @@ def GSO(M, bounds, num_particles, max_iter, costFunc):
     return_list = manager.list()
     shared_list = [np.random.uniform(lb, ub, dims), -1]
     all_processes = []
+    list1 = manager.list()
+    list2 = manager.list()
+    list3 = manager.list()
+    list4 = manager.list()
+    list5 = manager.list()
     for i in range(M):
         #initial= np.random.uniform(-10,10, 2)               # initial starting location [x1,x2...]         
         swarm_init = []
         for _ in range(num_particles):
             swarm_init.append(np.random.uniform(lb, ub, dims))
-
-        p = Process(target=PSO, args=(costFunc, bounds, max_iter, shared_list, return_list, l, None,swarm_init))
+        
+        if log:
+            if i == 0:
+                p = Process(target=PSO, args=(costFunc, bounds, max_iter, shared_list, return_list, l, None, swarm_init, True, list1))
+            elif i == 1:
+                p = Process(target=PSO, args=(costFunc, bounds, max_iter, shared_list, return_list, l, None, swarm_init, True, list2))
+            elif i == 2:
+                p = Process(target=PSO, args=(costFunc, bounds, max_iter, shared_list, return_list, l, None, swarm_init, True, list3))
+            elif i == 3:
+                p = Process(target=PSO, args=(costFunc, bounds, max_iter, shared_list, return_list, l, None, swarm_init, True, list4))
+            elif i == 4:
+                p = Process(target=PSO, args=(costFunc, bounds, max_iter, shared_list, return_list, l, None, swarm_init, True, list5))
+        else:
+            p = Process(target=PSO, args=(costFunc, bounds, max_iter, shared_list, return_list, l, None,swarm_init))
         all_processes.append(p)
 
     start(all_processes)
-    stop(all_processes)    
-    #print(return_list)
+    stop(all_processes)
+    if log:
+        the_list.append(list1)
+        the_list.append(list2)
+        the_list.append(list3)
+        the_list.append(list4)
+        the_list.append(list5)
+        # print(return_list)
     return PSO_purana(error, bounds, max_iter, swarm_init=list(return_list))
