@@ -6,7 +6,7 @@ import numpy as np
 
 
 # @jit
-def PSO_purana(costFunc,bounds,maxiter,swarm_init=None):
+def PSO_purana(costFunc,bounds,maxiter,swarm_init=None, log=False, the_list=None):
         
     num_dimensions=len(swarm_init[0])
     err_best_g=-1                   # best error for group
@@ -14,6 +14,8 @@ def PSO_purana(costFunc,bounds,maxiter,swarm_init=None):
     num_particles = len(swarm_init)
     # establish the swarm
     swarm = create_n_particles(num_particles, num_dimensions, swarm_init)
+    if log:
+        err_log_list = []
     # begin optimization loop
     i=0
     while i < maxiter:
@@ -32,7 +34,10 @@ def PSO_purana(costFunc,bounds,maxiter,swarm_init=None):
             swarm[j]['velocity_i'] = update_velocity(pos_best_g, swarm[j])
             swarm[j]['position_i'] = update_position(bounds, swarm[j])
         i+=1
-
+        if log:
+            err_log_list.append(err_best_g)
+    if log:
+        the_list.append(err_log_list)
     # print final results
     #print ('\n')
     #print (pos_best_g,' , ', err_best_g)
@@ -70,7 +75,7 @@ def PSO(costFunc,bounds,maxiter,shared_list, return_list, l,num_particles=None,s
             best_galactic_err = shared_list[1]
             #print("best_galactic_err: " ,best_galactic_err)
             #print("best_galactic_pos: ", best_galactic_pos)
-            if err_best_g < best_galactic_err:
+            if err_best_g < best_galactic_err and err_best_g != -1:
                 shared_list[1] = err_best_g
                 #print(err_best_g)
                 shared_list[0] = pos_best_g
@@ -125,7 +130,7 @@ def GSO(M, bounds, num_particles, max_iter, costFunc, log=False, the_list=None):
     l = Lock()
     shared_list = manager.list()
     return_list = manager.list()
-    shared_list = [np.random.uniform(lb, ub, dims), -1]
+    shared_list = [np.random.uniform(lb, ub, dims), 10000000] # like np.inf
     all_processes = []
     list1 = manager.list()
     list2 = manager.list()
@@ -162,4 +167,7 @@ def GSO(M, bounds, num_particles, max_iter, costFunc, log=False, the_list=None):
         the_list.append(list4)
         the_list.append(list5)
         # print(return_list)
-    return PSO_purana(error, bounds, max_iter, swarm_init=list(return_list))
+    else:
+        the_list = None
+        log = False
+    return PSO_purana(error, bounds, max_iter, swarm_init=list(return_list), log=log, the_list=the_list)
