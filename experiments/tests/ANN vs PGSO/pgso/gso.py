@@ -140,7 +140,7 @@ def GSO(bounds, num_particles, max_iter, classifier, train_data, epochs, batch_s
     l = Lock()
     shared_list = manager.list()
     return_list = manager.list()
-    shared_list = [np.random.uniform(lb, ub, dims), -1]
+    shared_list = [np.random.uniform(lb, ub, dims), np.inf]
     all_processes = []
     #pso_batch_size = train_data[0].shape[0]//M
     g_best_weights = None
