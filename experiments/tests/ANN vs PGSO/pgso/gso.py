@@ -2,6 +2,7 @@ from pgso.evaluate import error, evaluate, update_velocity, update_position
 from multiprocessing import Manager, Process, Lock
 from pgso.init_particles import create_n_particles
 from sklearn.utils import shuffle
+from tqdm import tqdm
 from numba import jit
 import numpy as np
 import copy
@@ -160,7 +161,7 @@ def GSO(bounds, num_particles, max_iter, classifier, train_data, epochs, batch_s
             swarm_init.append(np.random.uniform(lb, ub, (1, dims)))
         swarm_inits.append(swarm_init)
 
-    for i in range(epochs):
+    for i in tqdm(range(epochs)):
         all_processes = []
         sampler = sample_data(X_train, y_train, batch_size, mini_batch_size)
         for j in range(mini_batch_size//batch_size):    
