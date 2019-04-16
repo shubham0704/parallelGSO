@@ -6,6 +6,8 @@ A highly scalable parallel version of Galactic Swarm Optimisation Algorithm
 
 Galactic Swarm Optimization is a state-of-the-art meta-heuristic optimization algorithm which is insiped by the motion of stars, galaxies, superclusters interacting with each other under the influence of gravity.
 
+Train Artificial Neural Networks quickly without backprop!
+
 ----
 Take a look at a detailed introduction to our project - **[HERE](https://github.com/shubham0704/parallelGSO/blob/master/white%20paper.ipynb)**
 
@@ -25,7 +27,6 @@ For PIP Users -
 pip install -r requirements.txt
 ```
 
-
 # To run Benchmarks
 
 All the testing experiments are present in the experiments/tests directory.
@@ -41,6 +42,8 @@ You will then find a lot of notebooks which contains all kinds of different test
 To run the main experiments, check -[Main Experiments (Performance Tests)](https://github.com/shubham0704/parallelGSO/blob/master/experiments/tests/Main%20Experiments%20(Performance%20Tests).ipynb) 
 
 For per-cpu utilization benchmarks check - [Per CPU Utilisation Experiments](https://github.com/shubham0704/parallelGSO/blob/master/experiments/tests/Per%20CPU%20Utilisation%20Experiments.ipynb)
+
+To run Benchmarks against the functions test suite - [Benchmarks](https://github.com/shubham0704/parallelGSO/blob/master/experiments/Benchmarks.ipynb)
 
 **To Use PGSO (Parallel Galactic Swarm Optimization) as a module do -** 
 
@@ -59,9 +62,9 @@ PGSO(
     best_error -> the best minimized error for the given function
 ```
 
-**To test using our provided test functions**
+** Training Artificial Neural Networks **
 
 ```
-available_functions = [sphere, rosen, rastrigin, griewank, zakharov, nonContinuousRastrigin]
-from pgso.test_functions import <function>
-
+Check out [ANN training](https://github.com/shubham0704/parallelGSO/tree/master/experiments/tests/ANN%20vs%20PGSO)
+This directory contains tutorial notebooks for you to get started.
+```
