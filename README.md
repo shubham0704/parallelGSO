@@ -62,7 +62,7 @@ PGSO(
     best_error -> the best minimized error for the given function
 ```
 
-** Training Artificial Neural Networks **
+**Training Artificial Neural Networks**
 
 ```
 Check out [ANN training](https://github.com/shubham0704/parallelGSO/tree/master/experiments/tests/ANN%20vs%20PGSO)
