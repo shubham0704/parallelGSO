@@ -64,7 +64,5 @@ PGSO(
 
 **Training Artificial Neural Networks**
 
-```
 Check out [ANN training](https://github.com/shubham0704/parallelGSO/tree/master/experiments/tests/ANN%20vs%20PGSO)
 This directory contains tutorial notebooks for you to get started.
-```
